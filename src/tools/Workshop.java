@@ -27,7 +27,7 @@ public class Workshop {
 
         while(grinderStack.size() > 0){
         AngleGrinder  poppedAngleGrinder = grinderStack.pop();
-        System.out.println("Popping " + poppedAngleGrinder.getName());
+        System.out.println("Popping " + poppedAngleGrinder.getModelNumber());
         }
     }
     

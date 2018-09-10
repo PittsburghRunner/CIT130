@@ -23,13 +23,13 @@ public class AngleGrinder {
     
     private float rpms = RPMS_DEFAULT_OFF;
     
-    public String name = "";
+    public String modelNumber = "";
 
-    public AngleGrinder(String name) {
-    this.name = name;
+    public AngleGrinder(String modelNumber) {
+    this.modelNumber = modelNumber;
 }
-    public String getName(){
-        return name+ " " +CLASS_NAME;
+    public String getModelNumber(){
+        return modelNumber+ " " +CLASS_NAME;
     }
     public boolean isPluggedIn() {
         System.out.println(CLASS_NAME + "isPluggedIn: " + isPluggedIn);
