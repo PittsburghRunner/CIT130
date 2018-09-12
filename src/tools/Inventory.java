@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Inventory {
 
-    private static LinkedList<AngleGrinderStock> angleGrinderStock = new LinkedList();
+    private static LinkedList<AngleGrinderStock> angleGrinderStockList = new LinkedList();
     //LinkedList<String> stringDemo;
 
     public static void main(String[] args) {
@@ -32,6 +32,7 @@ public class Inventory {
             System.out.println("2 - Remove First Item");
             System.out.println("3 - Remove Last Item");
             System.out.println("4 - Remove Middle Item");
+            System.out.println("5 - Add Sample Inventory");
             System.out.println("9 - To Exit");
 
             System.out.print("Type your choice and press enter: ");
@@ -58,6 +59,9 @@ public class Inventory {
                 case 4:
                     removeMiddleItem();
                     break;
+                case 5:
+                    addInventorySample();
+                    break;
                 case 9:
                     break;
                 default:
@@ -66,6 +70,14 @@ public class Inventory {
         }
         System.out.println("Exiting");
     }//close main method
+
+    public static void addInventorySample() {
+        angleGrinderStockList.add(new AngleGrinderStock("ABC", 2, 29.99f));
+        angleGrinderStockList.add(new AngleGrinderStock("DEF", 8, 21.99f));
+        angleGrinderStockList.add(new AngleGrinderStock("HIJ", 5, 19.99f));
+        angleGrinderStockList.add(new AngleGrinderStock("XYZ", 2, 50.99f));
+
+    }
 
     public static void addInventory() {
         Scanner inputScanner = new Scanner(System.in);
@@ -76,30 +88,44 @@ public class Inventory {
         System.out.println("Please enter the price: ");
         float cost = inputScanner.nextFloat();
 
-        angleGrinderStock.add(new AngleGrinderStock(model, count, cost));
+        angleGrinderStockList.add(new AngleGrinderStock(model, count, cost));
 
     }
 
     public static void removeFirstItem() {
-        int size = angleGrinderStock.size();
+        int size = angleGrinderStockList.size();
         if (size > 0) {
-            AngleGrinderStock angleGrinderStockItem = angleGrinderStock.removeFirst();
-            System.out.println("Removing First Item: " + angleGrinderStockItem.getAnglegrinder().getModelNumber());
+            if (angleGrinderStockList.peekFirst().getCount() > 1) {
+                angleGrinderStockList.peekFirst().decrementCount();
+                System.out.println("Removing First Item: " + angleGrinderStockList.peekFirst().getAnglegrinder().getModelNumber());
+
+            } else {
+                AngleGrinderStock angleGrinderStockItem = angleGrinderStockList.removeFirst();
+                System.out.println("Removing First Item: " + angleGrinderStockItem.getAnglegrinder().getModelNumber());
+            }
             //pop
         }
+        printInventory();
     }
 
     public static void removeLastItem() {
-        int size = angleGrinderStock.size();
+        int size = angleGrinderStockList.size();
         if (size > 0) {
-            AngleGrinderStock angleGrinderStockItem = angleGrinderStock.removeLast();
-            System.out.println("Removing Last Item: " + angleGrinderStockItem.getAnglegrinder().getModelNumber());
-        }
+            if (angleGrinderStockList.peekLast().getCount() > 1) {
+                angleGrinderStockList.peekLast().decrementCount();
+                System.out.println("Removing First Item: " + angleGrinderStockList.peekLast().getAnglegrinder().getModelNumber());
 
+            } else {
+                AngleGrinderStock angleGrinderStockItem = angleGrinderStockList.removeLast();
+                System.out.println("Removing First Item: " + angleGrinderStockItem.getAnglegrinder().getModelNumber());
+            }
+            //pop
+        }
+        printInventory();
     }
 
     public static void removeMiddleItem() {
-        int size = angleGrinderStock.size();
+        int size = angleGrinderStockList.size();
         System.out.println("size" + size);
         int itemIndexToRemove;
         if (size > 0) {
@@ -111,20 +137,34 @@ public class Inventory {
 
                 itemIndexToRemove = (size - 1) / 2;
             }
+            if (angleGrinderStockList.get(itemIndexToRemove).getCount() > 1) {
+                angleGrinderStockList.get(itemIndexToRemove).decrementCount();
+                System.out.println("Removing Middle Item: " + angleGrinderStockList.get(itemIndexToRemove).getAnglegrinder().getModelNumber());
+            } else {
+                System.out.println("Removing Middle Item: " + angleGrinderStockList.get(itemIndexToRemove).getAnglegrinder().getModelNumber());
+                angleGrinderStockList.remove(itemIndexToRemove);
+            }
             System.out.println("Index to remove: " + itemIndexToRemove);
-            System.out.println("Removing Middle Item: " + angleGrinderStock.get(itemIndexToRemove).getAnglegrinder().getModelNumber());
-            angleGrinderStock.remove(itemIndexToRemove);
+
         } else {
             System.out.println("Nothing to remove.");
         }
+        printInventory();
     }
 
     public static void printInventory() {
-        if (angleGrinderStock.size() > 0) {
-            for (AngleGrinderStock angleGrinderStockItem : angleGrinderStock) {
-                System.out.println(angleGrinderStock.indexOf(angleGrinderStockItem) + " - Qty:" + angleGrinderStockItem.getCount() + " of " + angleGrinderStockItem.getAnglegrinder().getModelNumber() + " @ $" + angleGrinderStockItem.getCost());
+        float total = 0f;
+        System.out.println("\n\n\n********Priting Report*********\n");
+        if (angleGrinderStockList.size() > 0) {
+            for (AngleGrinderStock angleGrinderStockItem : angleGrinderStockList) {
+                System.out.println(angleGrinderStockList.indexOf(angleGrinderStockItem) + " - Qty:" + angleGrinderStockItem.getCount() + " of " + angleGrinderStockItem.getAnglegrinder().getModelNumber() + " @ $" + angleGrinderStockItem.getCost());
+                total = (angleGrinderStockItem.getCost() * angleGrinderStockItem.getCount()) + total;
             }
         }
+        System.out.println("\n");
+        System.out.println("Total Inventory Assets $" + total);
+        System.out.println("\n");
+
     }
 
 }
