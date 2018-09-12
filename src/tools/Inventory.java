@@ -6,6 +6,7 @@
 package tools;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 /**
@@ -156,10 +157,29 @@ public class Inventory {
         float total = 0f;
         System.out.println("\n\n\n********Priting Report*********\n");
         if (angleGrinderStockList.size() > 0) {
-            for (AngleGrinderStock angleGrinderStockItem : angleGrinderStockList) {
+            ListIterator<AngleGrinderStock> iterator = angleGrinderStockList.listIterator();
+            while (iterator.hasNext()){
+                AngleGrinderStock angleGrinderStockItem = iterator.next();
                 System.out.println(angleGrinderStockList.indexOf(angleGrinderStockItem) + " - Qty:" + angleGrinderStockItem.getCount() + " of " + angleGrinderStockItem.getAnglegrinder().getModelNumber() + " @ $" + angleGrinderStockItem.getCost());
                 total = (angleGrinderStockItem.getCost() * angleGrinderStockItem.getCount()) + total;
             }
+            
+//                        for ( int index = 0; index < angleGrinderStockList.size(); index++ ) {
+//                AngleGrinderStock angleGrinderStockItem = angleGrinderStockList.get(index);
+//                System.out.println(angleGrinderStockList.indexOf(angleGrinderStockItem) + " - Qty:" + angleGrinderStockItem.getCount() + " of " + angleGrinderStockItem.getAnglegrinder().getModelNumber() + " @ $" + angleGrinderStockItem.getCost());
+//                total = (angleGrinderStockItem.getCost() * angleGrinderStockItem.getCount()) + total;
+//            }
+            
+            
+            
+//                        for (AngleGrinderStock angleGrinderStockItem : angleGrinderStockList) {
+//                System.out.println(angleGrinderStockList.indexOf(angleGrinderStockItem) + " - Qty:" + angleGrinderStockItem.getCount() + " of " + angleGrinderStockItem.getAnglegrinder().getModelNumber() + " @ $" + angleGrinderStockItem.getCost());
+//                total = (angleGrinderStockItem.getCost() * angleGrinderStockItem.getCount()) + total;
+//            }
+
+
+
+
         }
         System.out.println("\n");
         System.out.println("Total Inventory Assets $" + total);
