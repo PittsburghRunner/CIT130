@@ -23,13 +23,24 @@ public class HashMapDemo {
         demoMap.put("Planet", "Earth");
 
         System.out.println("Printing Key Values for demo map with the location of " + demoMap.get("Location Name"));
-
-        System.out.println("|Key" + generateWhiteSpace(20, 3) + "|Value" + generateWhiteSpace(25, 5) + "|");
+        int keyMaxLength = 0;
+        int valueMaxLength = 0; 
+        for(Map.Entry<String, String> entry : demoMap.entrySet()){
+            
+            if(entry.getKey().length() > keyMaxLength){
+                keyMaxLength = entry.getKey().length();
+            }
+            if(entry.getValue().length() > valueMaxLength){
+                valueMaxLength = entry.getValue().length();
+            }
+        }
+        
+        System.out.println("|Key" + generateWhiteSpace(keyMaxLength, 3) + "|Value" + generateWhiteSpace(valueMaxLength, 5) + "|");
         for (Map.Entry<String, String> entry : demoMap.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
 
-            System.out.println("|" + key + generateWhiteSpace(20, key.length()) + "|" + value + generateWhiteSpace(25, value.length()) + "|");
+            System.out.println("|" + key + generateWhiteSpace(keyMaxLength, key.length()) + "|" + value + generateWhiteSpace(valueMaxLength, value.length()) + "|");
         }
     }
 
