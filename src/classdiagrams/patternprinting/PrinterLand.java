@@ -23,7 +23,7 @@ public class PrinterLand {
         PyramidPrinter pm = new PyramidLooper();
         pm.printAPyramid(5);
         
-        
+       
         pm.printAPyramid(10);
 
 
