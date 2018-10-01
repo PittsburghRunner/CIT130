@@ -5,42 +5,53 @@
  */
 package mapStuff;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
+ * This demonstration deals with Maps, Iteration, and Lists. The for and while
+ * loops are also used.
  *
  * @author christopher.eckles
  */
 public class HashMapDemo {
 
     public static void main(String[] args) {
-        Map<String, String> demoMap = new HashMap<>();
+        ExpeditionMap expedMap = new ExpeditionMap();
+        printList(printMap(expedMap.getExpedMap()));
+    }
 
-        demoMap.put("Location Name", "Starfleet Headquarters");
-        demoMap.put("Organization", "Starfleet");
-        demoMap.put("Objective", "Gather Intel");
-        demoMap.put("Planet", "Earth");
-
-        System.out.println("Printing Key Values for demo map with the location of " + demoMap.get("Location Name"));
+    private static List<String> printMap(Map<String, String> map) {
+        System.out.println("Printing Key Values for demo map with the location of " + map.get("Location Name"));
         int keyMaxLength = 0;
-        int valueMaxLength = 0; 
-        for(Map.Entry<String, String> entry : demoMap.entrySet()){
-            
-            if(entry.getKey().length() > keyMaxLength){
+        int valueMaxLength = 0;
+        ArrayList<String> values = new ArrayList();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getKey().length() > keyMaxLength) {
                 keyMaxLength = entry.getKey().length();
             }
-            if(entry.getValue().length() > valueMaxLength){
+            if (entry.getValue().length() > valueMaxLength) {
                 valueMaxLength = entry.getValue().length();
             }
         }
-        
+
         System.out.println("|Key" + generateWhiteSpace(keyMaxLength, 3) + "|Value" + generateWhiteSpace(valueMaxLength, 5) + "|");
-        for (Map.Entry<String, String> entry : demoMap.entrySet()) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-
+            values.add(value);
             System.out.println("|" + key + generateWhiteSpace(keyMaxLength, key.length()) + "|" + value + generateWhiteSpace(valueMaxLength, value.length()) + "|");
+        }
+        return values;
+    }
+
+    private static void printList(List<String> items) {
+        Iterator iter = items.iterator();
+        System.out.println("\n\n\nPrinting List:");
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
         }
     }
 
