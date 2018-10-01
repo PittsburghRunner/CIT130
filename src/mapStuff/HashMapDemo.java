@@ -18,11 +18,19 @@ import java.util.Map;
  */
 public class HashMapDemo {
 
+    /**
+     * main method for running the program
+     * @param args no arguments required
+     */
     public static void main(String[] args) {
         ExpeditionMap expedMap = new ExpeditionMap();
         printList(printMap(expedMap.getExpedMap()));
     }
-
+/**
+ * Method to print a map that is passed in.
+ * @param map this map must  have Strings for both keys and values.
+ * @return Returns a list of the values inside the map. Use it if you like.
+ */
     private static List<String> printMap(Map<String, String> map) {
         System.out.println("Printing Key Values for demo map with the location of " + map.get("Location Name"));
         int keyMaxLength = 0;
@@ -37,16 +45,19 @@ public class HashMapDemo {
             }
         }
 
-        System.out.println("|Key" + generateWhiteSpace(keyMaxLength, 3) + "|Value" + generateWhiteSpace(valueMaxLength, 5) + "|");
+        System.out.println("| Key" + generateWhiteSpace(keyMaxLength + 3, 3) + "| Value" + generateWhiteSpace(valueMaxLength + 1, 5) + "|");
         for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             values.add(value);
-            System.out.println("|" + key + generateWhiteSpace(keyMaxLength, key.length()) + "|" + value + generateWhiteSpace(valueMaxLength, value.length()) + "|");
+            System.out.println("| " + key + generateWhiteSpace(keyMaxLength + 3, key.length()) + "| " + value + generateWhiteSpace(valueMaxLength + 1, value.length()) + "|");
         }
         return values;
     }
-
+/**
+ * Iterates over a list to print it.
+ * @param items accepts a string list of items.
+ */
     private static void printList(List<String> items) {
         Iterator iter = items.iterator();
         System.out.println("\n\n\nPrinting List:");
