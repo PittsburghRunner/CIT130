@@ -42,11 +42,6 @@ public class HashMapDemo {
             }
             if (entry.getValue().length() > valueMaxLength) {
                 valueMaxLength = entry.getValue().length();
-            }
-        }
-
-        System.out.println("| Key" + generateWhiteSpace(keyMaxLength + 3, 3) + "| Value" + generateWhiteSpace(valueMaxLength + 1, 5) + "|");
-        for (Map.Entry<String, String> entry : map.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
             values.add(value);
